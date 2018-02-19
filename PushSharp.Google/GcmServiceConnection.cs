@@ -58,13 +58,13 @@ namespace PushSharp.Google
             var response = await http.PostAsync (Configuration.GcmUrl, content);
 
             if (response.IsSuccessStatusCode) {
-                await processResponseOk (response, notification).ConfigureAwait (false);
+                await ProcessResponseOk (response, notification).ConfigureAwait (false);
             } else {
-                await processResponseError (response, notification).ConfigureAwait (false);
+                await ProcessResponseError (response, notification).ConfigureAwait (false);
             }
         }
 
-        async Task processResponseOk (HttpResponseMessage httpResponse, GcmNotification notification)
+        async Task ProcessResponseOk (HttpResponseMessage httpResponse, GcmNotification notification)
         {
             var multicastResult = new GcmMulticastResultException ();
 
@@ -170,7 +170,7 @@ namespace PushSharp.Google
                 throw multicastResult;
         }
 
-        async Task processResponseError (HttpResponseMessage httpResponse, GcmNotification notification)
+        async Task ProcessResponseError (HttpResponseMessage httpResponse, GcmNotification notification)
         {
             string responseBody = null;
 
